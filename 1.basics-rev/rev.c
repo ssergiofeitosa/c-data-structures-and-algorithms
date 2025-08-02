@@ -23,29 +23,30 @@ bool equivalencia (racional *r1, racional *r2){
 }
 
 void reduzirRacional (racional *r, racional *res){
-    int a,b,r;
+    int a,b,resto;
     float q;
     if(r->nume>r->deno){
         a=r->nume;
         b=r->deno;
     }else a=r->deno;b=r->nume;
     while(b){
-        r=a%b;
+        resto=a%b;
         a=b;
-        b=r;
+        b=resto;
     }
     res->nume=r->nume/a;    
     res->deno=r->deno/a;
 
 }
 int main(){
-    racional r1,r2,r3;
+    racional r1,r2,r3,r4;
     
     criarRacional(3,6,&r1);
     criarRacional(1,3,&r2);
     multiplicarRacionais(&r1,&r2,&r3);
     somarRacionais(&r1,&r2,&r3);
-
+    reduzirRacional(&r1,&r4);
+    printf("%d/%d",r4.nume,r4.deno);
     // printf("%d", equivalencia(&r1,&r2));
     // printf("%d/%d \n",r3.nume, r3.deno );
     // printf("%d/%d \n", r3.nume , r3.deno);
