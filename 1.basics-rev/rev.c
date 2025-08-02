@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdbool.h>
 typedef struct{
     int nume;
     int deno;
@@ -16,20 +16,21 @@ void multiplicarRacionais (racional *r1, racional *r2, racional *res){
 void somarRacionais (racional *r1,racional *r2, racional *r3){
     r3->deno=r1->deno * r2->deno;
     r3->nume = ((r3->deno/r1->deno)*r1->nume)+((r3->deno/r2->deno)*r2->nume) ;
-    
 }
 
-int equivalencia (racional *r1, racional *r2){
-
+bool equivalencia (racional *r1, racional *r2){
+    return r1->nume*r2->deno == r2->nume*r1->deno;
 }
 int main(){
     racional r1,r2,r3;
     
-    criarRacional(2,3,&r1);
+    criarRacional(3,6,&r1);
     criarRacional(1,3,&r2);
     multiplicarRacionais(&r1,&r2,&r3);
     somarRacionais(&r1,&r2,&r3);
-    printf("%d/%d \n",r3.nume, r3.deno );
+    
+    // printf("%d", equivalencia(&r1,&r2));
+    // printf("%d/%d \n",r3.nume, r3.deno );
     // printf("%d/%d \n", r3.nume , r3.deno);
 
 }
