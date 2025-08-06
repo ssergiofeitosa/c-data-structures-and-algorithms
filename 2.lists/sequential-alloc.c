@@ -34,7 +34,7 @@ void remove (LIST *l, int pos){
         printf("INVALID INDEX");
         return;}
     int i;
-    
+    l->N--;
     for(i=pos-1;i<l->N;i++){
         l->val[i]=l->val[i+1];
     }           
