@@ -22,6 +22,10 @@ void insert (LIST *l, int val, int pos){
         printf("insert error");
         return;
     }
+    int i;
+    for(i=l->N;i>=pos;i--){
+        l->val[i]=l->val[i-1];
+    }
     l->val[pos-1]=val;
     l->N++;
 
@@ -51,8 +55,13 @@ int contains(LIST *l, int value){//verifies if a number is contained in the list
     }
     return 0;
 };
-void isOrdenate(LIST *l){//verifies if the list is ordenate
+int isOrdenate(LIST *l){//verifies if the list is ordenate
+    int i;
 
+    for(i=0;i<l->N-1;i++){
+        if(l->val[i]>l->val[i+1]){ return 0;}
+    }
+    return 1;
 }; 
 void generateList(LIST *l, int floor, int ceiling){};
 
@@ -66,6 +75,12 @@ int main(){
     insert(&l,4,4);
     // printf("%d", l.val[3]);
     printf("%d",recup(&l,4));
+    // if(contains(&l,2)){
+    //     printf("\n esta contido");
+    // }else{printf("\n nao esta contido");}
+    if(isOrdenate(&l)){
+        printf("\n esta ordenada");
+    }else {printf("\n nao esta ordenada");}
     
 
 }
