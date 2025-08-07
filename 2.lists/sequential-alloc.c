@@ -18,6 +18,10 @@ int size (LIST *l){
 void insert (LIST *l, int val, int pos){
     // int value = val;
     // int position=pos;
+    if(pos<1||pos>l->N+1){
+        printf("insert error");
+        return;
+    }
     l->val[pos-1]=val;
     l->N++;
 
@@ -29,10 +33,10 @@ int recup (LIST *l, int pos){
     }
     return l->val[pos-1];   
 }
-void remove (LIST *l, int pos){
+void removeNode (LIST *l, int pos){
     if(1>pos||pos>l->N){
         printf("INVALID INDEX");
-        return;}
+        return ;}
     int i;
     l->N--;
     for(i=pos-1;i<l->N;i++){
@@ -61,7 +65,6 @@ int main(){
     insert(&l,3,3);
     insert(&l,4,4);
     // printf("%d", l.val[3]);
-    remove(&l,4);
     printf("%d",recup(&l,4));
     
 
