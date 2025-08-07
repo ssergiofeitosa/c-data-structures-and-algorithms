@@ -40,6 +40,19 @@ void remove (LIST *l, int pos){
     }           
 };
 
+int contains(LIST *l, int value){//verifies if a number is contained in the list
+    int i,j;
+    for(j=0;j<l->N;j++){
+        if(l->val[j]==value){return 1;}
+    }
+    return 0;
+};
+void isOrdenate(LIST *l){//verifies if the list is ordenate
+
+}; 
+void generateList(LIST *l, int floor, int ceiling){};
+
+
 int main(){
     LIST l;
     createList(&l);
