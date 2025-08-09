@@ -1,5 +1,6 @@
 #include <stdio.h>
-#define max 4
+#include <stdlib.h>
+#define max 10000
 
 typedef struct{
  int N; //number of elemnts
@@ -63,24 +64,36 @@ int isOrdenate(LIST *l){//verifies if the list is ordenate
     }
     return 1;
 }; 
-void generateList(LIST *l, int floor, int ceiling){};
+void generateList(LIST *l, int floor, int ceiling){
+    int tam=ceiling-floor;
+    if(ceiling-floor>max){
+        printf("invalid interval");exit(1);}
+    else{
+        int i;
+        for(i=0;tam>i-1;i++){
+            l->val[i]=floor+i;
+            printf("%d \n",l->val[i]);
+        }
+    }
+};
 
 
 int main(){
     LIST l;
     createList(&l);
-    insert(&l,1,1);
-    insert(&l,2,2);
-    insert(&l,3,3);
-    insert(&l,4,4);
+    // insert(&l,1,1);
+    // insert(&l,2,2);
+    // insert(&l,3,3);
+    // insert(&l,4,4);
+    generateList(&l,1,120);
     // printf("%d", l.val[3]);
-    printf("%d",recup(&l,4));
+    // printf("%d",recup(&l,4));
     // if(contains(&l,2)){
     //     printf("\n esta contido");
     // }else{printf("\n nao esta contido");}
-    if(isOrdenate(&l)){
-        printf("\n esta ordenada");
-    }else {printf("\n nao esta ordenada");}
+    // if(isOrdenate(&l)){
+    //     printf("\n esta ordenada");
+    // }else {printf("\n nao esta ordenada");}
     
 
 }
