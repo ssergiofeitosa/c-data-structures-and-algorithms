@@ -13,7 +13,7 @@ void createList(linkedList *l){
 
 int size (linkedList l){
     if(l==NULL){
-        printf("list is empty \n");return 0;
+       return 0 ;
     }else{
         int i;
         for(i=0;l!=NULL;i++,l=l->next);
@@ -42,16 +42,49 @@ void insert (linkedList *l, int pos, int value){
      }
 }
 
+int recover (linkedList l, int pos){ //returns the value in a set position
+    if(pos<1||pos>size(l)){
+        printf("out of bounds(recover)");exit(3) ;
+    }
+    int i=0;
+    linkedList aux;
+    for(aux=l;i<pos-1;aux=aux->next,i++);
+    return aux->val;
+}
+
+void Remove (linkedList *l, int pos){
+    if(pos<1||pos>size(*l)){
+      printf("out of bounds(remove)");exit(4); 
+    }
+    //cases: first position or not
+    int i=0;
+    linkedList remove;
+    if(pos==1){
+        remove=*l;
+        *l=remove->next;
+        free(remove);
+    }else{
+        linkedList remove;
+        for(remove=*l;i<pos-2;remove=remove->next,i++);
+        free(remove);
+    }
+}
+
+void destroy (linkedList *l){}
+
+// void insertRec(linkedList *l, int pos, int value){
+//     if(pos<1||pos>size(*l)+1){
+//        printf("insert error: out of bounds \n"); exit(2);}    
+// }
+ 
 int main(){
     linkedList l;
     createList(&l);
     insert(&l,1,1);
-    insert(&l,1,2);
+    insert(&l,2,2);
     insert(&l,3,3);
-    insert(&l,4,4);
-    printf("%d", l->val);
-    printf("%d", l->next->val);
-    printf("%d", l->next->next->val);
-    printf("%d", l->next->next->next->val);    
-    // printf("%d",size(l));
+    printf("%d \n", l->val);
+    printf("%d \n", l->next->val);
+    printf("%d \n", l->next->next->val);
+    printf("%d \n",recover(l,2));
 }
