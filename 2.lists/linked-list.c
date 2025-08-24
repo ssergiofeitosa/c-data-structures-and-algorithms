@@ -7,6 +7,10 @@ typedef struct node{
 }NODE;
 typedef NODE *linkedList;
 
+int isEmpty(linkedList l) {
+    return l == NULL;
+}
+
 void createList(linkedList *l){
     *l=NULL;
 }
@@ -90,7 +94,7 @@ void destroy (linkedList *l){
 int sizeRec(linkedList l){
    if(!l){return 0;}
    else{
-    return  1+tamRec(l->next);
+    return  (1+sizeRec(l->next));
    }
 }
 
@@ -98,6 +102,7 @@ int recupRec(linkedList l, int pos){
     if(pos<1||pos>sizeRec(l)){
         printf("out of bounds ");exit(6);
     }else{
+        if(!l){printf("empty pos");}
         if(pos==1){return l->val;}
         else{
             return recupRec(l->next,pos-1);
@@ -105,21 +110,41 @@ int recupRec(linkedList l, int pos){
     }
 }
 
-// void insertRec(linkedList *l, int pos, int value){
-//     if(pos<1||pos>size(*l)+1){
-//        printf("insert error: out of bounds \n"); exit(2);}    
-// }
-   void destroyRec(){}
+void insertRec(linkedList *l, int pos, int value){
+    if(pos<1||pos>size(*l)+1){
+       printf("insert error: out of bounds \n"); exit(2);
+    }   
+    if(pos==1){
+        linkedList novo;
+        novo=(NODE*)malloc(sizeof(NODE));
+        //hurr durr verificar se a memoria foi alocada corretamente hurr durr
+        novo->val=value;
+        novo->next=*l;
+        *l=novo;
+        
+    }else{
+        return insertRec(&(*l)->next,pos-1,value);
+    }
+}
+
+   void destroyRec(linkedList l){
+    if(l){
+        destroyRec(l->next);
+        free(l);
+    }
+   }
 int main(){
     linkedList l;
     createList(&l);
-    insert(&l,1,1);
-    insert(&l,2,2);
-    insert(&l,3,3);
-    printf("%d \n", sizeRec(l));
+    insertRec(&l,1,1);
+    insertRec(&l,2,2);
+    insertRec(&l,3,3);
+    // printf("%d \n", sizeRec(l));
     // destroy(&l);
-    printf("%d \n", l->val);
-    printf("%d \n", l->next->val);
-    printf("%d \n", l->next->next->val);
+    destroy(&l);
+    if(isEmpty(l)){printf("lsita foi destruida \n");}
+    printf("Primeiro: %d \n", recupRec(l,1));
+    printf("Segundo: %d \n", recupRec(l,2));
+    printf("Terceiro: %d \n", recupRec(l,3));
     // printf("%d \n",recupRec(l,1));
 }
