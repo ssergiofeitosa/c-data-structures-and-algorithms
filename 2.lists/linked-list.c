@@ -65,14 +65,27 @@ void Remove (linkedList *l, int pos){
         free(remove);
     }else{
         linkedList aux;
-        for(aux=*l;i<pos-2;aux=aux->next,i++);
+        for(aux=*l;i<pos-2;aux=aux->next,i++); //percorre até posição anterior ao nó de remoção
         remove=aux->next;
         aux->next=remove->next;
         free(remove);
     }
     return;}
 
-void destroy (linkedList *l){}
+void destroy (linkedList *l){
+    if(!l){printf("list doesnt exist");exit(5);}
+    linkedList aux;
+    // for(*l;*l!=NULL;aux=aux->next){
+    //     aux=*l;
+    //     *l=(*l)->next;
+    //     free(*l);
+    // } OR
+    while(*l){
+        aux=*l;
+        *l=(*l)->next;
+        free(aux);
+    }
+}
 
 // void insertRec(linkedList *l, int pos, int value){
 //     if(pos<1||pos>size(*l)+1){
@@ -85,7 +98,7 @@ int main(){
     insert(&l,1,1);
     insert(&l,2,2);
     insert(&l,3,3);
-    Remove(&l,2);
+    // destroy(&l);
     printf("%d \n", l->val);
     printf("%d \n", l->next->val);
     printf("%d \n", l->next->next->val);
