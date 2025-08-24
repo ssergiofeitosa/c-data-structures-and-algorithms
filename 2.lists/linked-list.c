@@ -87,7 +87,7 @@ void destroy (linkedList *l){
     }
 }
 
-int tamRec(linkedList l){
+int sizeRec(linkedList l){
    if(!l){return 0;}
    else{
     return  1+tamRec(l->next);
@@ -95,7 +95,7 @@ int tamRec(linkedList l){
 }
 
 int recupRec(linkedList l, int pos){
-    if(pos<1||pos>tamRec(l)){
+    if(pos<1||pos>sizeRec(l)){
         printf("out of bounds ");exit(6);
     }else{
         if(pos==1){return l->val;}
@@ -116,7 +116,7 @@ int main(){
     insert(&l,1,1);
     insert(&l,2,2);
     insert(&l,3,3);
-    printf("%d \n", tamRec(l));
+    printf("%d \n", sizeRec(l));
     // destroy(&l);
     printf("%d \n", l->val);
     printf("%d \n", l->next->val);
