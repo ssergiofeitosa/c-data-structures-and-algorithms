@@ -87,20 +87,39 @@ void destroy (linkedList *l){
     }
 }
 
+int tamRec(linkedList l){
+   if(!l){return 0;}
+   else{
+    return  1+tamRec(l->next);
+   }
+}
+
+int recupRec(linkedList l, int pos){
+    if(pos<1||pos>tamRec(l)){
+        printf("out of bounds ");exit(6);
+    }else{
+        if(pos==1){return l->val;}
+        else{
+            return recupRec(l->next,pos-1);
+        }
+    }
+}
+
 // void insertRec(linkedList *l, int pos, int value){
 //     if(pos<1||pos>size(*l)+1){
 //        printf("insert error: out of bounds \n"); exit(2);}    
 // }
- 
+   void destroyRec(){}
 int main(){
     linkedList l;
     createList(&l);
     insert(&l,1,1);
     insert(&l,2,2);
     insert(&l,3,3);
+    printf("%d \n", tamRec(l));
     // destroy(&l);
     printf("%d \n", l->val);
     printf("%d \n", l->next->val);
     printf("%d \n", l->next->next->val);
-    // printf("%d \n",recover(l,2));
+    // printf("%d \n",recupRec(l,1));
 }
