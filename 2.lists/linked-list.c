@@ -56,7 +56,7 @@ void Remove (linkedList *l, int pos){
     if(pos<1||pos>size(*l)){
       printf("out of bounds(remove)");exit(4); 
     }
-    //cases: first position or not
+    //cases: first position; other positions
     int i=0;
     linkedList remove;
     if(pos==1){
@@ -64,11 +64,13 @@ void Remove (linkedList *l, int pos){
         *l=remove->next;
         free(remove);
     }else{
-        linkedList remove;
-        for(remove=*l;i<pos-2;remove=remove->next,i++);
+        linkedList aux;
+        for(aux=*l;i<pos-2;aux=aux->next,i++);
+        remove=aux->next;
+        aux->next=remove->next;
         free(remove);
     }
-}
+    return;}
 
 void destroy (linkedList *l){}
 
@@ -83,8 +85,9 @@ int main(){
     insert(&l,1,1);
     insert(&l,2,2);
     insert(&l,3,3);
+    Remove(&l,2);
     printf("%d \n", l->val);
     printf("%d \n", l->next->val);
     printf("%d \n", l->next->next->val);
-    printf("%d \n",recover(l,2));
+    // printf("%d \n",recover(l,2));
 }
