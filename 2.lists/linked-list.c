@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef int ind;
+
 typedef struct node{
     int val;
     struct node *next;
@@ -126,13 +128,45 @@ void insertRec(linkedList *l, int pos, int value){
         return insertRec(&(*l)->next,pos-1,value);
     }
 }
+//verify is list is empty
+//verify if node is smaller than next
+ind isOrderedRec(linkedList l){
+    if(!l||l&&!(l->next)){
+        return 1;
+    }
+    if(l->val>l->next->val){
+        return 0;   
+    }
+    isOrderedRec(l->next);
+    
+}
 
-   void destroyRec(linkedList l){
+void destroyRec(linkedList l){
     if(l){
         destroyRec(l->next);
         free(l);
     }
-   }
+}
+
+int isOrdered(linkedList l){
+    int t=size(l);
+    if(!l || t==1){
+        return 1;
+    }
+    for(t;t>1;t--,l=l->next){  //
+        if((l->val)>(l->next->val)){return 0;}
+    }
+    return 1;
+}   
+
+// int isOrderedRec(linkedList l){
+//         if(!l||(l&&!(l->next))){
+//         return 0;
+//     }
+//     if(){
+//     }
+//     return isOrderedRec(l->next);
+// }   
 int main(){
     linkedList l;
     createList(&l);
@@ -141,10 +175,11 @@ int main(){
     insertRec(&l,3,3);
     // printf("%d \n", sizeRec(l));
     // destroy(&l);
-    destroy(&l);
+    // destroy(&l);
     if(isEmpty(l)){printf("lsita foi destruida \n");}
     printf("Primeiro: %d \n", recupRec(l,1));
     printf("Segundo: %d \n", recupRec(l,2));
     printf("Terceiro: %d \n", recupRec(l,3));
+    printf("%d \n", isOrderedRec(l));
     // printf("%d \n",recupRec(l,1));
 }
