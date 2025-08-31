@@ -51,12 +51,43 @@ int recup (linkedHeader l, int pos){
     for(aux=(l)->next;i<pos-1;aux=aux->next,i++);
     return aux->val;
 }
-void Remove (linkedHeader *l){
+void Remove (linkedHeader *l,int pos){
+    if(pos<1||pos>size(*l)){
+        printf("out of bounds (rem)"); exit(3);
+    }
+    linkedHeader aux,rem;
+    if(pos==1){
+        rem=(*l)->next;
+        (*l)->next=rem->next;
+        free(rem);
+    }else{
+        int i;
+        for(i=0,aux=(*l)->next;i<pos-2;aux=aux->next,i++);
+        rem=aux->next;
+        aux->next=rem->next;
+        free(rem);
+    }
+    (*l)->val--;
 
 }
-void destroy(linkedHeader l){
-
+void destroy(linkedHeader *l){
+    if(!l){printf("list empty/null");}
+    linkedHeader rem;
+    while(l){
+        rem=(*l);
+        free(rem);
+        *l=(*l)->next;
+    }
 }
 int main(){
-
+    linkedHeader l;
+    createList(&l);
+    insert(&l,1,2);
+    insert(&l,2,4);
+    insert(&l,3,6);
+    // Remove(&l,2);
+    destroy(&l);
+    printf("%d \n", recup(l,1));
+    printf("%d \n", recup(l,2));
+    printf("%d \n", recup(l,3));
 }
