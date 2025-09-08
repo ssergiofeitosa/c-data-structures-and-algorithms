@@ -46,7 +46,11 @@ int insert(doubleLinked *l, int pos, int val){
 }
 
 int recup(doubleLinked l, int pos){
-
+    if (pos<1||pos>size(l)){
+            printf ("out of bounds recup");exit(2);
+        }
+    for(;pos>1;l=l->next,pos--);
+    return l->val;            
 }
 
 int Remove(doubleLinked *l,int pos){
@@ -60,4 +64,12 @@ int destroy(doubleLinked l){
 int main(){
     doubleLinked l;
     create(&l);
+    insert(&l,1,2);
+    insert(&l,2,4);
+    insert(&l,2,5);    
+    insert(&l,3,6);
+    printf("%d \n", recup(l,1));
+    printf("%d \n", recup(l,2));
+    printf("%d \n", recup(l,3));
+    printf("%d \n", recup(l,4));
 }
