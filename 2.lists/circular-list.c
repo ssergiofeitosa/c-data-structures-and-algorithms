@@ -85,7 +85,7 @@ void rem (circularList *l, int pos){
     }else{
         circularList rem, aux=*l;
         int i = pos;
-        for(;i>1;aux=aux->next,i--);
+        for(;i>1;aux=aux->next,i--); //para no nó anterior, pq começa a contar a partir do ultimo(*l),
         rem=aux->next;
         aux->next=rem->next;
         if(size==pos) { 
