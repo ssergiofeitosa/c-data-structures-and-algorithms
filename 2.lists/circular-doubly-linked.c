@@ -93,7 +93,14 @@ void ret(lista *l, int pos){
     }
 }
 
-void destroy(lista l){}
+void anihilate(lista l){
+    lista aux=l;
+    while(l){
+        aux=l;
+        l=l->next;
+        free(aux);
+    }
+}
 
 int main(){
     lista l;
@@ -101,6 +108,6 @@ int main(){
     ins(&l,1,2);
     ins(&l,2,4);
     ins(&l,3,6);
-    // ret(&l,1);
+    anihilate(l);
     printf("%d , %d", recup(l,1), recup(l,3));
 }
